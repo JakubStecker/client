@@ -35,15 +35,15 @@
                         <div class="flex justify-between">
                             <div class="mt-2">
                                 <div>
-                                    <input type="radio" name="radio" id="1" value="25" v-model="pickedSize" @click="checked" @change="() => {sizeCheck({id: product.id, pizzaSize: 33})}">
+                                    <input type="radio" name="radio" id="1" value="25" v-model="pickedPizzaPrice" @click="checked" @change="() => {sizeCheck({id: product.id, pizzaSize: 33})}">
                                     <label for="1">33cm</label>
                                 </div>
                                 <div>
-                                    <input type="radio" name="radio" id="2" value="35" v-model="pickedSize" @click="checked" @change="() => {sizeCheck({id: product.id, pizzaSize: 40})}">
+                                    <input type="radio" name="radio" id="2" value="35" v-model="pickedPizzaPrice" @click="checked" @change="() => {sizeCheck({id: product.id, pizzaSize: 40})}">
                                     <label for="2">40cm</label>
                                 </div>
                                 <div>
-                                    <input type="radio" name="radio" id="3" value="40" v-model="pickedSize" @click="checked" @change="() => {sizeCheck({id: product.id, pizzaSize: 50})}">
+                                    <input type="radio" name="radio" id="3" value="40" v-model="pickedPizzaPrice" @click="checked" @change="() => {sizeCheck({id: product.id, pizzaSize: 50})}">
                                     <label for="3">50cm</label>
                                 </div>
                             </div>
@@ -55,24 +55,24 @@
                                 <div class="block">
                                     <div class="mt-2">
                                         <div>
-                                            <input type="checkbox" id="ananas" class="form-checkbox text-cinnabar-500" value="Ananas" v-model="checkedIngredients" @change="() => {ingredientsCheck({ id: product.id, checkedIngredients: checkedIngredients, pickedSize: pickedSize})}">
-                                            <label for="ananas">Ananas<span class="text-light-gray-500 ml-2">({{pickedSize}}Kč)</span></label>
+                                            <input type="checkbox" id="ananas" class="form-checkbox text-cinnabar-500" value="Ananas" v-model="checkedIngredients" @change="() => {ingredientsCheck({ id: product.id, checkedIngredients: checkedIngredients, pickedPizzaPrice: pickedPizzaPrice})}">
+                                            <label for="ananas">Ananas<span class="text-light-gray-500 ml-2">({{pickedPizzaPrice}}Kč)</span></label>
                                         </div>
                                         <div>
-                                            <input type="checkbox" id="sunka" class="form-checkbox text-cinnabar-500" value="Sunka" v-model="checkedIngredients" @change="() => {ingredientsCheck({ id: product.id, checkedIngredients: checkedIngredients, pickedSize: pickedSize})}">
-                                            <label for="sunka">Šunka<span class="text-light-gray-500 ml-2">({{pickedSize}}Kč)</span></label>
+                                            <input type="checkbox" id="sunka" class="form-checkbox text-cinnabar-500" value="Sunka" v-model="checkedIngredients" @change="() => {ingredientsCheck({ id: product.id, checkedIngredients: checkedIngredients, pickedPizzaPrice: pickedPizzaPrice})}">
+                                            <label for="sunka">Šunka<span class="text-light-gray-500 ml-2">({{pickedPizzaPrice}}Kč)</span></label>
                                         </div>
                                         <div>
-                                            <input type="checkbox" id="syr" class="form-checkbox text-cinnabar-500" value="Syr" v-model="checkedIngredients" @change="() => {ingredientsCheck({ id: product.id, checkedIngredients: checkedIngredients, pickedSize: pickedSize})}">
-                                            <label for="syr">Sýr<span class="text-light-gray-500 ml-2">({{pickedSize}}Kč)</span></label>
+                                            <input type="checkbox" id="syr" class="form-checkbox text-cinnabar-500" value="Syr" v-model="checkedIngredients" @change="() => {ingredientsCheck({ id: product.id, checkedIngredients: checkedIngredients, pickedPizzaPrice: pickedPizzaPrice})}">
+                                            <label for="syr">Sýr<span class="text-light-gray-500 ml-2">({{pickedPizzaPrice}}Kč)</span></label>
                                         </div>
                                         <div>
-                                            <input type="checkbox" id="spenat" class="form-checkbox text-cinnabar-500" value="Spenat" v-model="checkedIngredients" @change="() => {ingredientsCheck({ id: product.id, checkedIngredients: checkedIngredients, pickedSize: pickedSize})}">
-                                            <label for="spenat">Špenát<span class="text-light-gray-500 ml-2">({{pickedSize}}Kč)</span></label>
+                                            <input type="checkbox" id="spenat" class="form-checkbox text-cinnabar-500" value="Spenat" v-model="checkedIngredients" @change="() => {ingredientsCheck({ id: product.id, checkedIngredients: checkedIngredients, pickedPizzaPrice: pickedPizzaPrice})}">
+                                            <label for="spenat">Špenát<span class="text-light-gray-500 ml-2">({{pickedPizzaPrice}}Kč)</span></label>
                                         </div>
                                         <div>
-                                            <input type="checkbox" id="rukola" class="form-checkbox text-cinnabar-500" value="Rukola" v-model="checkedIngredients" @change="() => {ingredientsCheck({ id: product.id, checkedIngredients: checkedIngredients, pickedSize: pickedSize})}">
-                                            <label for="rukola">Rukola<span class="text-light-gray-500 ml-2">({{pickedSize}}Kč)</span></label>
+                                            <input type="checkbox" id="rukola" class="form-checkbox text-cinnabar-500" value="Rukola" v-model="checkedIngredients" @change="() => {ingredientsCheck({ id: product.id, checkedIngredients: checkedIngredients, pickedPizzaPrice: pickedPizzaPrice})}">
+                                            <label for="rukola">Rukola<span class="text-light-gray-500 ml-2">({{pickedPizzaPrice}}Kč)</span></label>
                                         </div>
                                     </div>
                                 </div>
@@ -105,7 +105,7 @@ import { mapMutations } from "vuex"
         data() {
             return {
                 boolChecked:false,
-                pickedSize: 0,
+                pickedPizzaPrice: 0,
                 checkedIngredients: [],
                 quantity: 1
             }
