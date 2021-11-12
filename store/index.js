@@ -16,26 +16,14 @@ export const mutations = {
         let compareArray = true
         if (cartItem != undefined) {
             item.selectedIngredients.sort()
-            console.log(item.selectedIngredients.sort())
             cartItem.selectedIngredients.sort()
-            console.log(cartItem.selectedIngredients.sort())
             for (let j = 0; j < item.selectedIngredients.length; j++) {
-                console.log(item.selectedIngredients.length)
-                console.log(cartItem.selectedIngredients.length)
-                console.log(item.selectedIngredients[j])
-                console.log(cartItem.selectedIngredients[j])
                 if (item.selectedIngredients.length != cartItem.selectedIngredients.length || item.selectedIngredients[j] != cartItem.selectedIngredients[j]) {
                     compareArray = false
                     console.log(compareArray)
                     break 
                 }  
             }
-            console.log(cartItem)
-            console.log(item.id)
-            console.log(cartItem.id)
-            console.log(item.size)
-            console.log(cartItem.size)
-            console.log(compareArray) 
         }
         if (cartItem != null && item.id == cartItem.id && item.size == cartItem.size && compareArray)
             cartItem.quantity = x.quantity
