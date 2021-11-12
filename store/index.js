@@ -28,7 +28,7 @@ export const mutations = {
         if (cartItem != null && item.id == cartItem.id && item.size == cartItem.size && compareArray)
             cartItem.quantity = x.quantity
         else {
-            item.quantity = x.quantity
+            item.quantity = x.quantity //tady (v else statementu) by asi bylo lepší dát state.inCart.push(item) a pak si najít ten item v cartu a upravovat jeho quantity, aby sis zachoval ten základní objekt
             state.inCart.push(item)
         }
     },
