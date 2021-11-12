@@ -25,11 +25,14 @@ export const mutations = {
                 }  
             }
         }
-        if (cartItem != null && item.id == cartItem.id && item.size == cartItem.size && compareArray)
-            cartItem.quantity = x.quantity
+        if (cartItem != null && item.id == cartItem.id && item.size == cartItem.size && compareArray) {
+            cartItem.quantity += x.quantity
+            console.log("It is true")
+            console.log(cartItem.size)
+        }
         else {
-            item.quantity = x.quantity
             state.inCart.push(item)
+            console.log("It is false")
         }
     },
     sizeCheck(state, x) {
