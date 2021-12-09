@@ -11,37 +11,28 @@ export const mutations = {
         for (let i = 0; i < state.products.length; i++) {
             item = state.products[i].cards.find(product => product.id == x.id)
             if (item != undefined) break
-        }     
-        // let cartItem = state.inCart.find(product => product.id == x.id)
-        state.inCart.push(item)
-        console.log(state.inCart)
-        // let compareArray = true
-        // if (cartItem != undefined) {
-        //     console.log("cartItem " + cartItem.size);
-        //     item.selectedIngredients.sort()
-        //     cartItem.selectedIngredients.sort()
-        //     console.log(item.selectedIngredients);
-        //     console.log(cartItem.selectedIngredients);
-        //     for (let j = 0; j < item.selectedIngredients.length; j++) {
-        //         if (item.selectedIngredients.length != cartItem.selectedIngredients.length || item.selectedIngredients[j] != cartItem.selectedIngredients[j]) {
-        //             compareArray = false
-        //             console.log(compareArray)
-        //             break 
-        //         }  
-        //     }
-        //     console.log("cartItem " + cartItem.size);
-        //     console.log(item.size);
-        //     console.log(cartItem.size)
-        // }
-        
-        // if (cartItem != undefined && item.id == cartItem.id && item.size == cartItem.size && compareArray) {
-        //     cartItem.quantity += x.quantity
-        //     console.log("It is true")
-        // }
-        // else {
-        //     state.inCart.push(item)
-        //     console.log("It is false")
-        // }
+        }
+        let cartItem = state.inCart.find(product => product.id == x.id)
+        let compareArray = true
+        if (cartItem != undefined) {
+            item.selectedIngredients.sort()
+            cartItem.selectedIngredients.sort()
+            for (let j = 0; j < item.selectedIngredients.length; j++) {
+                if (item.selectedIngredients.length != cartItem.selectedIngredients.length || item.selectedIngredients[j] != cartItem.selectedIngredients[j]) {
+                    compareArray = false
+                    console.log(compareArray)
+                    break 
+                }  
+            }
+        }
+        if (cartItem != undefined && item.id == cartItem.id && item.size == cartItem.size && compareArray) {
+            cartItem.quantity += x.quantity
+        }
+        else {
+            item.quantity = x.quantity
+            state.inCart.push(JSON.parse(JSON.stringify(item)))
+            item.quantity = 1
+        }
     },
     sizeCheck(state, x) {
         for (let i = 0; i < state.products.length; i++) {
@@ -49,6 +40,15 @@ export const mutations = {
             if(item != undefined) {
                 item.size = x.pizzaSize
                 console.log(item.size);
+                if (item.size == 33) {
+                    item.price = 159;
+                }
+                if (item.size == 40) {
+                    item.price = 219;
+                }
+                if (item.size == 50) {
+                    item.price = 269;
+                }
             } 
         }
     },
@@ -64,9 +64,28 @@ export const mutations = {
             }
         } 
     },
+    subQuantity(state, id) {
+        let cartItem = state.inCart.find(product => product.id == id)
+            if (cartItem.quantity != 1) 
+                cartItem.quantity--;
+    },
+    addQuantity(state, x) {
+        let cartItem = state.inCart.find(product => product.id == x.id)
+            cartItem.quantity++;
+    },
+    finalPriceMethod(state, id) {
+        let cartItem = state.inCart.find(product => product.id == id)
+        if (cartItem != undefined) {
+            let sum = cartItem.price + cartItem.ingredientsPrice
+            cartItem.totalSum = sum * cartItem.quantity
+        }
+    },
 }
 
 export const getters = {
+    getCart: (state) => {
+        return state.inCart
+    },
     getProductById: (state) => (id) => {
         for (let i = 0; i < state.products.length; i++) {
             const element = state.products[i].cards.find(product => product.id == id)

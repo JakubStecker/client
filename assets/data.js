@@ -10,11 +10,13 @@ export const cardSections = [
             image: 'vlastni-pizza.png',
             title: 'Vlastní pizza',
             pizzaIngredients: '?',
-         
+
             size: 0,
+            price: 0,
             ingredientsPrice: 0,
             selectedIngredients: [],
-            quantity: 1
+            quantity: 1,
+            totalSum: 0
         },
         {
             id: 11,
@@ -26,7 +28,8 @@ export const cardSections = [
             size: 0,
             ingredientsPrice: 0,
             selectedIngredients: [],
-            quantity: 1
+            quantity: 1,
+            totalSum: 0
         },
         {
             id: 12,
@@ -37,7 +40,8 @@ export const cardSections = [
             size: 0,
             ingredientsPrice: 0,
             selectedIngredients: [],
-            quantity: 1
+            quantity: 1,
+            totalSum: 0
         },
         {
             id: 14,
@@ -48,7 +52,8 @@ export const cardSections = [
             size: 0,
             ingredientsPrice: 0,
             selectedIngredients: [],
-            quantity: 1
+            quantity: 1,
+            totalSum: 0
         },
         {
             id: 15,
@@ -59,7 +64,8 @@ export const cardSections = [
             size: 0,
             ingredientsPrice: 0,
             selectedIngredients: [],
-            quantity: 1
+            quantity: 1,
+            totalSum: 0
         },
         {
             id: 16,
@@ -70,7 +76,8 @@ export const cardSections = [
             size: 0,
             ingredientsPrice: 0,
             selectedIngredients: [],
-            quantity: 1
+            quantity: 1,
+            totalSum: 0
         },
         {
             id: 17,
@@ -81,7 +88,8 @@ export const cardSections = [
             size: 0,
             ingredientsPrice: 0,
             selectedIngredients: [],
-            quantity: 1
+            quantity: 1,
+            totalSum: 0
         }
       ]
     },
@@ -100,7 +108,8 @@ export const cardSections = [
             size: 0,
             ingredientsPrice: 0,
             selectedIngredients: [],
-            quantity: 1
+            quantity: 1,
+            totalSum: 0
         },
         {
             id: 19,
@@ -111,7 +120,8 @@ export const cardSections = [
             size: 0,
             ingredientsPrice: 0,
             selectedIngredients: [],
-            quantity: 1
+            quantity: 1,
+            totalSum: 0
         },
         {
             id: 20,
@@ -122,7 +132,8 @@ export const cardSections = [
             size: 0,
             ingredientsPrice: 0,
             selectedIngredients: [],
-            quantity: 1
+            quantity: 1,
+            totalSum: 0
         },
         {
             id: 21,
@@ -133,7 +144,8 @@ export const cardSections = [
             size: 0,
             ingredientsPrice: 0,
             selectedIngredients: [],
-            quantity: 1
+            quantity: 1,
+            totalSum: 0
         },
         {
             id: 22,
@@ -144,7 +156,8 @@ export const cardSections = [
             size: 0,
             ingredientsPrice: 0,
             selectedIngredients: [],
-            quantity: 1
+            quantity: 1,
+            totalSum: 0
         },
         {
             id: 23,
@@ -155,7 +168,8 @@ export const cardSections = [
             size: 0,
             ingredientsPrice: 0,
             selectedIngredients: [],
-            quantity: 1
+            quantity: 1,
+            totalSum: 0
         }
         ]
     },
@@ -174,7 +188,8 @@ export const cardSections = [
             size: 0,
             ingredientsPrice: 0,
             selectedIngredients: [],
-            quantity: 1
+            quantity: 1,
+            totalSum: 0
         },
         {
             id: 25,
@@ -185,7 +200,8 @@ export const cardSections = [
             size: 0,
             ingredientsPrice: 0,
             selectedIngredients: [],
-            quantity: 1
+            quantity: 1,
+            totalSum: 0
         },
         {
             id: 26,
@@ -196,7 +212,8 @@ export const cardSections = [
             size: 0,
             ingredientsPrice: 0,
             selectedIngredients: [],
-            quantity: 1
+            quantity: 1,
+            totalSum: 0
         },
         {
             id: 27,
@@ -207,7 +224,8 @@ export const cardSections = [
             size: 0,
             ingredientsPrice: 0,
             selectedIngredients: [],
-            quantity: 1
+            quantity: 1,
+            totalSum: 0
         }
       ]
     },
