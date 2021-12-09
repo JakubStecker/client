@@ -70,7 +70,13 @@ export const mutations = {
                 cartItem.quantity--;
     },
     addQuantity(state, x) {
-        let cartItem = state.inCart.find(product => product.id == x.id)
+        let cartItem = state.inCart.find(product => product.id == x.id && () => {
+          for (let i = 0; i < state.inCart.length; i++) {
+            if (x.ing == state.inCart[i].checkedIngredients) {
+              return true
+            }
+          }
+        })
             cartItem.quantity++;
     },
     finalPriceMethod(state, id) {
