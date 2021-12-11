@@ -1,5 +1,4 @@
 getCartItem = (state, x) => {
-    console.log(x)
     let cartItem = undefined
     x.ing.sort()
     for (let i = 0; i < state.inCart.length; i++) {
