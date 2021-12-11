@@ -1,6 +1,8 @@
-import {cardSections} from "~/assets/data.js"
-import {carousels} from "~/assets/data.js"
-import {navLinks} from "~/assets/data.js"
+import { cardSections } from "~/assets/data.js"
+import { carousels } from "~/assets/data.js"
+import { navLinks } from "~/assets/data.js"
+
+const {getCartItem} = require('./helper')
 
 export const state = () => ({
     products: cardSections,
@@ -24,9 +26,8 @@ export const mutations = {
             for (let j = 0; j < item.selectedIngredients.length; j++) {
                 if (item.selectedIngredients.length != cartItem.selectedIngredients.length || item.selectedIngredients[j] != cartItem.selectedIngredients[j]) {
                     compareArray = false
-                    console.log(compareArray)
-                    break 
-                }  
+                    break
+                }
             }
         }
         if (cartItem != undefined && item.id == cartItem.id && item.size == cartItem.size && compareArray) {
@@ -41,9 +42,8 @@ export const mutations = {
     sizeCheck(state, x) {
         for (let i = 0; i < state.products.length; i++) {
             const item = state.products[i].cards.find(product => product.id == x.id)
-            if(item != undefined) {
+            if (item != undefined) {
                 item.size = x.pizzaSize
-                console.log(item.size);
                 if (item.size == 33) {
                     item.price = 159;
                 }
@@ -53,100 +53,35 @@ export const mutations = {
                 if (item.size == 50) {
                     item.price = 269;
                 }
-            } 
+            }
         }
     },
     ingredientsCheck(state, x) {
-        for (let i = 0; i < state.products.length; i++){
+        for (let i = 0; i < state.products.length; i++) {
             const item = state.products[i].cards.find(product => product.id == x.id)
-            if(item !== undefined) {
+            if (item !== undefined) {
                 item.ingredientsPrice = x.pickedPizzaPrice * x.checkedIngredients.length;
                 for (let j = 0; j < x.checkedIngredients.length; j++) {
                     item.selectedIngredients[j] = x.checkedIngredients[j];
-                    console.log(item.selectedIngredients[j]);
                 }
-            }
-        } 
-    },
-    subQuantity(state, x) {
-        let cartItem = undefined
-        x.ing.sort()
-        for (let i = 0; i < state.inCart.length; i++) {
-            if (x.size == state.inCart[i].size) {
-                console.log("size");
-                if (state.inCart[i].selectedIngredients.length > 0 && x.id == state.inCart[i].id) {
-                    console.log(x.id);
-                    console.log(state.inCart[i].id); 
-                    state.inCart[i].selectedIngredients.sort()
-                    for (let j = 0; j < x.ing.length; j++) {
-                        if (x.ing.length == state.inCart[i].selectedIngredients.length && x.ing[j] == state.inCart[i].selectedIngredients[j]) {
-                            cartItem = state.inCart[i]
-                            break 
-                        }
-                    }   
-                }
-                else {
-                    cartItem = state.inCart.find(item => item.id == x.id && item.size == x.size)
-                }
-            }
-        }   
-        if (cartItem != undefined) {
-            cartItem.quantity--;
-            if (cartItem.quantity == 0) {
-                console.log(state.inCart.indexOf(cartItem));
-                state.inCart.splice(state.inCart.indexOf(cartItem))
             }
         }
-            
+    },
+    subQuantity(state, x) {
+        let cartItem = getCartItem(state, x)
+        if (cartItem != undefined) {
+            cartItem.quantity--;
+            if (cartItem.quantity == 0) state.inCart.splice(state.inCart.indexOf(cartItem))
+        }
+
     },
     addQuantity(state, x) {
-        let cartItem = undefined
-        x.ing.sort()
-        for (let i = 0; i < state.inCart.length; i++) {
-            if (x.size == state.inCart[i].size) {
-                console.log("size");
-                if (state.inCart[i].selectedIngredients.length > 0 && x.id == state.inCart[i].id) {
-                    console.log(x.id);
-                    console.log(state.inCart[i].id);
-                    state.inCart[i].selectedIngredients.sort()
-                    for (let j = 0; j < x.ing.length; j++) {
-                        if (x.ing.length == state.inCart[i].selectedIngredients.length && x.ing[j] == state.inCart[i].selectedIngredients[j]) {
-                            cartItem = state.inCart[i]
-                            break 
-                        }
-                    }   
-                }
-                else {
-                    cartItem = state.inCart.find(item => item.id == x.id && item.size == x.size)
-                }
-            }
-        }   
-        if (cartItem != undefined) 
-            cartItem.quantity++;    
+        let cartItem = getCartItem(state, x)
+        if (cartItem != undefined)
+            cartItem.quantity++;
     },
     finalPriceMethod(state, x) {
-        console.log(x.id);
-        let cartItem = undefined
-        x.ing.sort()
-        for (let i = 0; i < state.inCart.length; i++) {
-            if (x.size == state.inCart[i].size) {
-                console.log("size");
-                if (state.inCart[i].selectedIngredients.length > 0 && x.id == state.inCart[i].id) {
-                    console.log(x.id);
-                    console.log(state.inCart[i].id);
-                    state.inCart[i].selectedIngredients.sort()
-                    for (let j = 0; j < x.ing.length; j++) {
-                        if (x.ing.length == state.inCart[i].selectedIngredients.length && x.ing[j] == state.inCart[i].selectedIngredients[j]) {
-                            cartItem = state.inCart[i]
-                            break 
-                        }
-                    }   
-                }
-                else {
-                    cartItem = state.inCart.find(item => item.id == x.id && item.size == x.size)
-                }
-            }
-        } 
+        let cartItem = getCartItem(state, x)
         if (cartItem != undefined) {
             let sum = cartItem.price + cartItem.ingredientsPrice
             cartItem.totalSum = sum * cartItem.quantity

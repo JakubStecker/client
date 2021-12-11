@@ -72,7 +72,8 @@ import { mapState } from "vuex"
                 }
             },
             celkem() {
-                return this.mezisoucet + this.doprava
+                if (this.mezisoucet === 0) return 0
+                else return this.mezisoucet + this.doprava
             }
         },
         method: {
