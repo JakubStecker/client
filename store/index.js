@@ -1,7 +1,11 @@
 import {cardSections} from "~/assets/data.js"
+import {carousels} from "~/assets/data.js"
+import {navLinks} from "~/assets/data.js"
 
 export const state = () => ({
     products: cardSections,
+    carousel: carousels,
+    navLink: navLinks,
     inCart: []
 })
 
@@ -64,23 +68,85 @@ export const mutations = {
             }
         } 
     },
-    subQuantity(state, id) {
-        let cartItem = state.inCart.find(product => product.id == id)
-            if (cartItem.quantity != 1) 
-                cartItem.quantity--;
+    subQuantity(state, x) {
+        let cartItem = undefined
+        x.ing.sort()
+        for (let i = 0; i < state.inCart.length; i++) {
+            if (x.size == state.inCart[i].size) {
+                console.log("size");
+                if (state.inCart[i].selectedIngredients.length > 0 && x.id == state.inCart[i].id) {
+                    console.log(x.id);
+                    console.log(state.inCart[i].id); 
+                    state.inCart[i].selectedIngredients.sort()
+                    for (let j = 0; j < x.ing.length; j++) {
+                        if (x.ing.length == state.inCart[i].selectedIngredients.length && x.ing[j] == state.inCart[i].selectedIngredients[j]) {
+                            cartItem = state.inCart[i]
+                            break 
+                        }
+                    }   
+                }
+                else {
+                    cartItem = state.inCart.find(item => item.id == x.id && item.size == x.size)
+                }
+            }
+        }   
+        if (cartItem != undefined) {
+            cartItem.quantity--;
+            if (cartItem.quantity == 0) {
+                console.log(state.inCart.indexOf(cartItem));
+                state.inCart.splice(state.inCart.indexOf(cartItem))
+            }
+        }
+            
     },
     addQuantity(state, x) {
-        let cartItem = state.inCart.find(product => product.id == x.id && () => {
-          for (let i = 0; i < state.inCart.length; i++) {
-            if (x.ing == state.inCart[i].checkedIngredients) {
-              return true
+        let cartItem = undefined
+        x.ing.sort()
+        for (let i = 0; i < state.inCart.length; i++) {
+            if (x.size == state.inCart[i].size) {
+                console.log("size");
+                if (state.inCart[i].selectedIngredients.length > 0 && x.id == state.inCart[i].id) {
+                    console.log(x.id);
+                    console.log(state.inCart[i].id);
+                    state.inCart[i].selectedIngredients.sort()
+                    for (let j = 0; j < x.ing.length; j++) {
+                        if (x.ing.length == state.inCart[i].selectedIngredients.length && x.ing[j] == state.inCart[i].selectedIngredients[j]) {
+                            cartItem = state.inCart[i]
+                            break 
+                        }
+                    }   
+                }
+                else {
+                    cartItem = state.inCart.find(item => item.id == x.id && item.size == x.size)
+                }
             }
-          }
-        })
-            cartItem.quantity++;
+        }   
+        if (cartItem != undefined) 
+            cartItem.quantity++;    
     },
-    finalPriceMethod(state, id) {
-        let cartItem = state.inCart.find(product => product.id == id)
+    finalPriceMethod(state, x) {
+        console.log(x.id);
+        let cartItem = undefined
+        x.ing.sort()
+        for (let i = 0; i < state.inCart.length; i++) {
+            if (x.size == state.inCart[i].size) {
+                console.log("size");
+                if (state.inCart[i].selectedIngredients.length > 0 && x.id == state.inCart[i].id) {
+                    console.log(x.id);
+                    console.log(state.inCart[i].id);
+                    state.inCart[i].selectedIngredients.sort()
+                    for (let j = 0; j < x.ing.length; j++) {
+                        if (x.ing.length == state.inCart[i].selectedIngredients.length && x.ing[j] == state.inCart[i].selectedIngredients[j]) {
+                            cartItem = state.inCart[i]
+                            break 
+                        }
+                    }   
+                }
+                else {
+                    cartItem = state.inCart.find(item => item.id == x.id && item.size == x.size)
+                }
+            }
+        } 
         if (cartItem != undefined) {
             let sum = cartItem.price + cartItem.ingredientsPrice
             cartItem.totalSum = sum * cartItem.quantity
@@ -91,6 +157,15 @@ export const mutations = {
 export const getters = {
     getCart: (state) => {
         return state.inCart
+    },
+    getCarousel: (state) => () => {
+        return state.carousel
+    },
+    getProducts: (state) => () => {
+        return state.products
+    },
+    getNavLinks: (state) => () => {
+        return state.navLink
     },
     getProductById: (state) => (id) => {
         for (let i = 0; i < state.products.length; i++) {

@@ -29,14 +29,14 @@
                     <div class="flex justify-between border-t-2 border-white-linen-500">
                         <h4 class="text-white text-lg">Doprava</h4>
                         <div class="flex flex-col">
-                          <h4 class="text-white text-lg text-right">Doprava zdarma</h4>
+                          <h4 class="text-white text-lg text-right">{{doprava}}Kč</h4>
                           <p class="text-white text-right text-sm">Možnosti přepravy budou aktualizovány na stránce pokladny.</p> 
                         </div>
                         
                     </div>
                     <div class="flex justify-between border-t-2 border-white-linen-500">
                         <h4 class="text-white text-lg">Cena celkem</h4>
-                        <h4 class="text-white text-lg">500Kč</h4>
+                        <h4 class="text-white text-lg">{{celkem}}Kč</h4>
                     </div>
                 </div>  
             </div>
@@ -50,7 +50,7 @@ import { mapState } from "vuex"
     export default {
         data() {
             return {
-                cartArr: this.$store.getters.getCart
+                cartArr: this.$store.getters.getCart,
             }
         },
         computed: {
@@ -62,6 +62,17 @@ import { mapState } from "vuex"
                     total += item.totalSum
                 });
                 return total
+            },
+            doprava() {
+                if (this.mezisoucet > 600) {
+                    return 0
+                }
+                else {
+                    return 90
+                }
+            },
+            celkem() {
+                return this.mezisoucet + this.doprava
             }
         },
         method: {
@@ -70,7 +81,7 @@ import { mapState } from "vuex"
             //     for (let i = 0; i < this.cartArr.length; i++) {
             //         const item = this.cartArr[i]
             //         sum += item.price
-            //     }
+            //     } 
             //     return sum
             // }
         }

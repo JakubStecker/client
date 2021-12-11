@@ -39,7 +39,7 @@
               @prev="prev"  
             >
               <carousel-slide 
-                v-for="(slide, index) in slider"
+                v-for="(slide, index) in carousel"
                 :key="slide.id"
                 :index ="index"
                 :visibleSlide="visibleSlide">
@@ -86,7 +86,7 @@
         
         <div class="w-4/5">
           <card-menu-display 
-          v-for="Info in cardInfo"
+          v-for="Info in cardSection"
           :key="Info.id"
           :cardSection="Info"
         />
@@ -101,8 +101,6 @@
 
 <script>
 // *****DATA*****
-import {carousels} from "../assets/data.js"
-import {cardSections} from "../assets/data.js"
 // *****COMPONENTS*****
 import CardMenuDisplay from '../components/CardMenuDisplay.vue'
 import Carousel from '../components/Carousel.vue'
@@ -119,8 +117,6 @@ import NavMenu from '../components/NavMenu.vue'
     },
     data() {
       return {
-        slider: carousels,
-        cardInfo: cardSections,
         visibleSlide: 0,
         currentWidth: 0,
         notShowOnMobile: false,
@@ -147,7 +143,13 @@ import NavMenu from '../components/NavMenu.vue'
     },
     computed: {
       slidesLen() {
-        return this.slider.length
+        return this.carousel.length
+      },
+      carousel() {
+        return this.$store.getters.getCarousel()
+      },
+      cardSection() {
+        return this.$store.getters.getProducts()
       }
     },
     methods : {

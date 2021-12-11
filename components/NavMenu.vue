@@ -18,7 +18,7 @@
       <div class="flex flex-col lg:flex-row h-3/4" v-if="!isMobile || mobileMenu">
         <ul class="flex flex-col lg:flex-row text-4xl lg:text-lg items-center text-white-linen-500 font-bold" @click="showMenu">
           <NuxtLink
-            v-for="liLink in liLinks"
+            v-for="liLink in navLinks"
             :key="liLink.id"
             :to="liLink.link"
             class="li lg:mr-6">{{ liLink.li }}
@@ -40,11 +40,9 @@
 </template>
 
 <script>
-import {navLinks} from "../assets/data.js"
     export default {
         data() {
             return {
-              liLinks: navLinks,
               currentWidth: 0,
               isMobile: false,
               mobileMenu: false,
@@ -76,6 +74,11 @@ import {navLinks} from "../assets/data.js"
           const that = this;
           window.addEventListener("resize", function() { that.currentWidth = window.screen.width; } )
         },
+        computed: {
+          navLinks() {
+            return this.$store.getters.getNavLinks()
+          }
+        }
   }
 </script>
 

@@ -22,17 +22,16 @@
         </td>
         <td>
             <div class="flex justify-center items-center bg-white-linen-600 p-4 h-12 rounded-full lg:mr-6">
-                <button class="p-1 rounded-full h-8 w-2 flex items-center justify-center" @click="() => {subQuantity(item.id); finalPriceMethod(item.id)}">
+                <button class="p-1 rounded-full h-8 w-2 flex items-center justify-center" @click="() => {subQuantity({id: item.id, ing: item.selectedIngredients, size: item.size}); finalPriceMethod({id: item.id, ing: item.selectedIngredients, size: item.size})}">
                     <span class="text-xl text-light-black-500">-</span>
                 </button>
 
                 <p class="mr-8 ml-8 text-xl">{{ item.quantity }}</p>
                 
-                <button class="p-1 rounded-full h-8 w-2 flex items-center justify-center" @click="() => {addQuantity({ id: item.id, ing: item.checkedIngredients}); finalPriceMethod(item.id)}">
+                <button class="p-1 rounded-full h-8 w-2 flex items-center justify-center" @click="() => {addQuantity({ id: item.id, ing: item.selectedIngredients, size: item.size}); finalPriceMethod({id: item.id, ing: item.selectedIngredients, size: item.size})}">
                     <span class="text-xl text-light-black-500">+</span>
                 </button>
             </div>
-
         </td>
         <td>{{item.totalSum}}</td>
     </tr>   
